@@ -1,52 +1,43 @@
-import { Button, Input, useTheme } from "@erfanetoon/react-tailwind-ui";
-import { ButtonThemeProps } from "@erfanetoon/react-tailwind-ui/components/button/types";
-import { Colors } from "@erfanetoon/react-tailwind-ui/types/global";
-import { useState } from "react";
+import { Input, useTheme } from "@erfanetoon/react-tailwind-ui";
 import Highlight from "react-highlight";
 
-const ButtonComponent = () => {
-    const { global, button } = useTheme();
-
-    const [value, setValue] = useState("Button");
-    const [color, setColor] = useState<Colors | null>(null);
-    const [variant, setVariant] = useState<ButtonThemeProps["variant"] | null>(
-        null,
-    );
-    const [size, setSize] = useState<ButtonThemeProps["size"] | null>(null);
+const Theme = () => {
+    const { button, chip, codeInput, global, iconButton, input, handleChange } =
+        useTheme();
 
     return (
-        <div className="">
-            <Highlight className="direction-ltr rounded-2xl shadow">
-                {`
-<Button 
-      color="${color || global?.color}"
-      size="${variant || button?.defaultProps?.variant}"
-      variant="${size || button?.defaultProps?.size}"
->
-  ${value}
-</Button>
+        <div>
+            <div className="mb-4">
+                <Highlight className="direction-ltr rounded-2xl shadow">
+                    {`
+<ThemeProvider
+    global={{
+        color: "${global?.color}",
+        direction: "${global?.direction}",
+        borderRadius: "${global?.borderRadius}",
+        transition: "${global?.transition}",
+    }}>
+</ThemeProvider>
                 `}
-            </Highlight>
+                </Highlight>
+            </div>
 
-            <Button
-                {...(color ? { color } : {})}
-                {...(variant ? { variant } : {})}
-                className="mt-8">
-                {value}
-            </Button>
-
-            <div className="flex items-center mt-8">
+            <div className="flex items-center">
                 <div className="mx-2">
-                    <span className="w-full">Color</span>
+                    <span className="block">Color</span>
                     <select
                         name="color"
                         id="color"
                         className="w-full"
-                        value={color || ""}
+                        value={global?.color}
                         onChange={(e) =>
-                            setColor((e.currentTarget.value || null) as any)
+                            handleChange({
+                                global: {
+                                    ...global,
+                                    color: e.currentTarget.value as any,
+                                },
+                            })
                         }>
-                        <option value="">Not set - use from theme</option>
                         <option
                             className="bg-primary-600 text-white"
                             value="primary">
@@ -157,81 +148,69 @@ const ButtonComponent = () => {
 
                 <div className="mx-2">
                     <div className="mb-1">
-                        <label htmlFor="rtl">Filled</label>
+                        <label htmlFor="rtl">Right-to-Left</label>
                         <input
                             id="rtl"
                             type="radio"
                             onChange={(e) =>
-                                e.currentTarget.checked && setVariant("filled")
+                                handleChange({
+                                    global: {
+                                        ...global,
+                                        direction: e.currentTarget.checked
+                                            ? "rtl"
+                                            : "ltr",
+                                    },
+                                })
                             }
-                            checked={
-                                variant === "filled" ||
-                                (!variant &&
-                                    button?.defaultProps?.variant === "filled")
-                            }
+                            checked={global?.direction === "rtl"}
                         />
                     </div>
 
-                    <div className="mb-1">
-                        <label htmlFor="rtl">Outlined</label>
+                    <div>
+                        <label htmlFor="ltr">Left-to-Right</label>
                         <input
-                            id="rtl"
+                            id="ltr"
                             type="radio"
                             onChange={(e) =>
-                                e.currentTarget.checked &&
-                                setVariant("outlined")
+                                handleChange({
+                                    global: {
+                                        ...global,
+                                        direction: e.currentTarget.checked
+                                            ? "ltr"
+                                            : "rtl",
+                                    },
+                                })
                             }
-                            checked={
-                                variant === "outlined" ||
-                                (!variant &&
-                                    button?.defaultProps?.variant ===
-                                        "outlined")
-                            }
-                        />
-                    </div>
-
-                    <div className="mb-1">
-                        <label htmlFor="rtl">Outlined Filled</label>
-                        <input
-                            id="rtl"
-                            type="radio"
-                            onChange={(e) =>
-                                e.currentTarget.checked &&
-                                setVariant("outlined_filled")
-                            }
-                            checked={
-                                variant === "outlined_filled" ||
-                                (!variant &&
-                                    button?.defaultProps?.variant ===
-                                        "outlined_filled")
-                            }
-                        />
-                    </div>
-
-                    <div className="mb-1">
-                        <label htmlFor="rtl">Gradiend</label>
-                        <input
-                            id="rtl"
-                            type="radio"
-                            onChange={(e) =>
-                                e.currentTarget.checked &&
-                                setVariant("gradient")
-                            }
-                            checked={
-                                variant === "gradient" ||
-                                (!variant &&
-                                    button?.defaultProps?.variant ===
-                                        "gradient")
-                            }
+                            checked={global?.direction === "ltr"}
                         />
                     </div>
                 </div>
 
                 <div className="mx-2">
                     <Input
-                        label="Button text"
-                        onChange={(e) => setValue(e.target.value)}
-                        value={value}
+                        onChange={(e) =>
+                            handleChange({
+                                global: {
+                                    ...global,
+                                    borderRadius: e.target.value,
+                                },
+                            })
+                        }
+                        value={global?.borderRadius}
+                    />
+                </div>
+
+                <div className="mx-2">
+                    <Input
+                        onChange={(e) =>
+                            handleChange({
+                                global: {
+                                    ...global,
+                                    transition: e.target.value,
+                                },
+                            })
+                        }
+                        value={global?.transition}
                     />
                 </div>
             </div>
@@ -239,4 +218,4 @@ const ButtonComponent = () => {
     );
 };
 
-export default ButtonComponent;
+export default Theme;

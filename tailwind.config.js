@@ -1,12 +1,25 @@
-// const withTailwind = require("@erfanetoon/react-tailwind-ui/withTailwind");
+const plugin = require("tailwindcss/plugin");
+const withTailwind = require("@erfanetoon/react-tailwind-ui/withTailwind");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withTailwind({
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
-    important: true,
     theme: {},
     variants: {
         extend: {},
     },
-    plugins: [],
-};
+    plugins: [
+        plugin(function ({ addUtilities }) {
+            const newUtilities = {
+                ".direction-ltr": {
+                    direction: "ltr",
+                },
+                ".direction-rtl": {
+                    direction: "rtl",
+                },
+            };
+
+            addUtilities(newUtilities);
+        }),
+    ],
+});

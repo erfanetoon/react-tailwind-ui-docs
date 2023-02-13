@@ -1,14 +1,16 @@
 {
     "name": "react-tailwind-ui-docs",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": true,
     "dependencies": {
+        "@erfanetoon/react-tailwind-ui": "^1.2.1",
         "craco": "0.0.3",
+        "highlight.js": "^11.7.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-highlight": "^0.15.0",
         "react-router-dom": "^6.3.0",
         "react-scripts": "^5.0.1",
-        "sass": "^1.54.9",
         "typescript": "^4.7.4"
     },
     "scripts": {
@@ -38,6 +40,7 @@
         "@types/node": "^16.11.59",
         "@types/react": "^18.0.20",
         "@types/react-dom": "^18.0.6",
+        "@types/react-highlight": "^0.12.5",
         "autoprefixer": "^10.4.8",
         "body-parser": "^1.20.0",
         "eslint": "^8.24.0",
