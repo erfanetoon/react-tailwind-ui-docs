@@ -1,40 +1,51 @@
-import { Button, Input, useTheme } from "@erfanetoon/react-tailwind-ui";
-import { IButtonProps, TColors } from "@erfanetoon/react-tailwind-ui";
+import {
+    Chip,
+    IChipProps,
+    Input,
+    useTheme,
+} from "@erfanetoon/react-tailwind-ui";
+import { TColors } from "@erfanetoon/react-tailwind-ui";
 import {} from "@erfanetoon/react-tailwind-ui";
 import { useState } from "react";
 import Highlight from "react-highlight";
+import { TbMail } from "react-icons/tb";
 
-const ButtonComponent = () => {
+const ChipComponent = () => {
     const { global, button } = useTheme();
 
-    const [value, setValue] = useState("Button");
+    const [value, setValue] = useState("Chip");
     const [color, setColor] = useState<TColors | null>(null);
-    const [variant, setVariant] = useState<IButtonProps["variant"] | null>(
-        null,
-    );
-    const [size, setSize] = useState<IButtonProps["size"] | null>(null);
+    const [variant, setVariant] = useState<IChipProps["variant"] | null>(null);
+    const [size, setSize] = useState<IChipProps["size"] | null>(null);
+    const [withIcon, setWithIcon] = useState<boolean>(false);
+    const [iconPosition, setIconPosition] =
+        useState<IChipProps["iconPosition"]>("start");
 
     return (
         <div className="">
             <Highlight className="direction-ltr rounded-2xl shadow">
                 {`
-<Button 
+<Chip 
       color="${color || global?.color}"
       size="${size || button?.defaultProps?.size}"
       variant="${variant || button?.defaultProps?.variant}"
+      ${withIcon ? `icon={<TbMail />}` : ``}
+      iconPosition="${iconPosition}"
 >
   ${value}
-</Button>
+</Chip>
                 `}
             </Highlight>
 
-            <Button
+            <Chip
                 {...(color ? { color } : {})}
                 {...(variant ? { variant } : {})}
                 {...(size ? { size } : {})}
+                {...(withIcon ? { icon: <TbMail /> } : {})}
+                {...(iconPosition ? { iconPosition } : {})}
                 className="mt-8">
                 {value}
-            </Button>
+            </Chip>
 
             <div className="flex items-center mt-8">
                 <div className="mx-2">
@@ -159,8 +170,8 @@ const ButtonComponent = () => {
                 <div className="mx-2">
                     <span className="w-full">Size</span>
                     <select
-                        name="size"
-                        id="size"
+                        name="color"
+                        id="color"
                         className="w-full"
                         value={size || ""}
                         onChange={(e) =>
@@ -173,6 +184,36 @@ const ButtonComponent = () => {
                         <option value="lg">lg</option>
                         <option value="xl">xl</option>
                     </select>
+                </div>
+                <div className="mx-2">
+                    <div className="mb-1">
+                        <label htmlFor="rtl">With Icon</label>
+                        <input
+                            id="rtl"
+                            type="checkbox"
+                            onChange={(e) =>
+                                setWithIcon(e.currentTarget.checked)
+                            }
+                            checked={withIcon}
+                        />
+                    </div>
+
+                    <div className="mb-1">
+                        <span className="w-full">Icon Position</span>
+                        <select
+                            name="iconPosition"
+                            id="iconPosition"
+                            className="w-full"
+                            value={iconPosition || ""}
+                            onChange={(e) =>
+                                setIconPosition(
+                                    (e.currentTarget.value || null) as any,
+                                )
+                            }>
+                            <option value="start">start</option>
+                            <option value="end">end</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div className="mx-2">
@@ -259,4 +300,4 @@ const ButtonComponent = () => {
     );
 };
 
-export default ButtonComponent;
+export default ChipComponent;

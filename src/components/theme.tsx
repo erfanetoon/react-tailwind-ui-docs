@@ -2,8 +2,7 @@ import { Input, useTheme } from "@erfanetoon/react-tailwind-ui";
 import Highlight from "react-highlight";
 
 const Theme = () => {
-    const { button, chip, codeInput, global, iconButton, input, handleChange } =
-        useTheme();
+    const { global, handleChange } = useTheme();
 
     return (
         <div>

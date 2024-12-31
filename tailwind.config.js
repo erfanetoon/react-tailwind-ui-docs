@@ -1,5 +1,5 @@
 const plugin = require("tailwindcss/plugin");
-const withTailwind = require("@erfanetoon/react-tailwind-ui/withTailwind");
+const { withTailwind } = require("@erfanetoon/react-tailwind-ui");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = withTailwind({

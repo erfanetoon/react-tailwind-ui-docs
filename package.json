@@ -3,12 +3,13 @@
     "version": "1.2.1",
     "private": true,
     "dependencies": {
-        "@erfanetoon/react-tailwind-ui": "^1.2.1",
+        "@erfanetoon/react-tailwind-ui": "^2.0.1",
         "craco": "0.0.3",
         "highlight.js": "^11.7.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-highlight": "^0.15.0",
+        "react-icons": "^5.4.0",
         "react-router-dom": "^6.3.0",
         "react-scripts": "^5.0.1",
         "typescript": "^4.7.4"
@@ -37,7 +38,7 @@
     },
     "devDependencies": {
         "@types/body-parser": "^1.19.2",
-        "@types/node": "^16.11.59",
+        "@types/node": "^18.19.68",
         "@types/react": "^18.0.20",
         "@types/react-dom": "^18.0.6",
         "@types/react-highlight": "^0.12.5",

@@ -1,40 +1,39 @@
-import { Button, Input, useTheme } from "@erfanetoon/react-tailwind-ui";
-import { IButtonProps, TColors } from "@erfanetoon/react-tailwind-ui";
-import {} from "@erfanetoon/react-tailwind-ui";
+import { IconButton, useTheme } from "@erfanetoon/react-tailwind-ui";
+import { IIconButtonProps, TColors } from "@erfanetoon/react-tailwind-ui";
 import { useState } from "react";
 import Highlight from "react-highlight";
+import { TbMagnet } from "react-icons/tb";
 
-const ButtonComponent = () => {
+const IconButtonComponent = () => {
     const { global, button } = useTheme();
 
-    const [value, setValue] = useState("Button");
     const [color, setColor] = useState<TColors | null>(null);
-    const [variant, setVariant] = useState<IButtonProps["variant"] | null>(
+    const [variant, setVariant] = useState<IIconButtonProps["variant"] | null>(
         null,
     );
-    const [size, setSize] = useState<IButtonProps["size"] | null>(null);
+    const [size, setSize] = useState<IIconButtonProps["size"] | null>(null);
 
     return (
         <div className="">
             <Highlight className="direction-ltr rounded-2xl shadow">
                 {`
-<Button 
+<IconButton 
       color="${color || global?.color}"
-      size="${size || button?.defaultProps?.size}"
-      variant="${variant || button?.defaultProps?.variant}"
+      size="${size || button?.defaultProps?.variant}"
+      variant="${variant || button?.defaultProps?.size}"
 >
-  ${value}
-</Button>
+{... any icon}
+</IconButton>
                 `}
             </Highlight>
 
-            <Button
+            <IconButton
                 {...(color ? { color } : {})}
                 {...(variant ? { variant } : {})}
                 {...(size ? { size } : {})}
                 className="mt-8">
-                {value}
-            </Button>
+                <TbMagnet />
+            </IconButton>
 
             <div className="flex items-center mt-8">
                 <div className="mx-2">
@@ -246,17 +245,9 @@ const ButtonComponent = () => {
                         />
                     </div>
                 </div>
-
-                <div className="mx-2">
-                    <Input
-                        label="Button text"
-                        onChange={(e) => setValue(e.target.value)}
-                        value={value}
-                    />
-                </div>
             </div>
         </div>
     );
 };
 
-export default ButtonComponent;
+export default IconButtonComponent;

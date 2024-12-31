@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app";
 import { ThemeProvider } from "@erfanetoon/react-tailwind-ui";
+import RootLayout from "./layouts/root";
+import { MainContextProvider } from "./context";
 import "highlight.js/styles/androidstudio.css";
 import "@styles/app.css";
 
@@ -14,17 +16,22 @@ root.render(
         <ThemeProvider
             global={{
                 color: "primary",
-                direction: "rtl",
+                direction: "ltr",
                 borderRadius: "rounded",
                 transition: "transition-all duration-300",
             }}>
+            <MainContextProvider>
+                <RootLayout>
+                    <App />
+                </RootLayout>
+            </MainContextProvider>
+
             <div
                 className={
                     "rounded-none rounded-sm rounded rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full" +
                     " " +
                     ""
                 }></div>
-            <App />
         </ThemeProvider>
     </React.StrictMode>,
 );
