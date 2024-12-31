@@ -5,6 +5,11 @@ module.exports = {
         port: 5000,
     },
     webpack: {
+        configure: (webpackConfig) => {
+            // Modify public path dynamically based on environment
+            webpackConfig.output.publicPath = '/react-tailwind-ui-docs/';
+            return webpackConfig;
+        },
         alias: {
             "@components": path.resolve(__dirname, "src/components"),
             "@constants": path.resolve(__dirname, "src/constants"),
